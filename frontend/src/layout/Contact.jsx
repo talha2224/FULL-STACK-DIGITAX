@@ -22,7 +22,7 @@ const Contact = () => {
   };
 
   const deleteData = (id) => {
-    axios.delete(`/api/v1/contact/${id}`)
+    axios.delete(`/contact/${id}`)
       .then((res) => {
         if (res.status === 200) {
           toast("Deleted  Sucessfully")
