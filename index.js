@@ -20,7 +20,7 @@ app.use("/api/v1",require('./routes/faqs'))
 app.use("/api/v1",require('./routes/iossTop'))
 app.use("/api/v1",require('./routes/iossText'))
 app.use("/api/v1",require('./routes/iossImage'))
-
+app.use('/images',express.static('./images'))
 app.use(express.static(path.join(__dirname,'./frontend/dist')))
 app.get('*',function(_,res){
     res.sendFile(path.join(__dirname,'./frontend/dist/index.html'),function(e){
@@ -29,7 +29,6 @@ app.get('*',function(_,res){
     })
 })
 
-app.use('/images',express.static('./images'))
 
 
 app.listen(port,()=>console.log(`server is running on port ${port}`))
