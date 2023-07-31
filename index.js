@@ -7,7 +7,6 @@ app.use(express.json())
 app.use(cors({origin:"*"}))
 const port = process.env.PORT || 4000
 const path = require('path');
-const aboutModel = require('./model/aboutModel');
 
 // DB
 dbConnection()
@@ -23,11 +22,6 @@ app.use("/api/v1",require('./routes/faqs'))
 app.use("/api/v1",require('./routes/iossTop'))
 app.use("/api/v1",require('./routes/iossText'))
 app.use("/api/v1",require('./routes/iossImage'))
-
-// let deleteall = async()=>{
-//     await aboutModel.deleteMany({})
-// }
-// deleteall()
 
 
 app.use(express.static(path.join(__dirname,'./frontend/dist')))
