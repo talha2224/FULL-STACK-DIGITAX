@@ -49,7 +49,7 @@ const Testimonial = () => {
                   return (
                     <div key={index} className=' flex items-center justify-center flex-col p-3 w-[25rem] h-[26rem] overflow-scroll shadow-shadow1 bg-slate-400 flex-shrink-0'>
                       <div className=''>
-                        <img src={`/images/${i.image}`} className=' mb-4 w-[10rem] h-[10rem] rounded-full bg-center bg-contain' alt="" />
+                        <img src={`${i.image}`} className=' mb-4 w-[10rem] h-[10rem] rounded-full bg-center bg-contain' alt="" />
                       </div>
                       <p className=' mb-4 text-[#00184A]'>{i.message}</p>
                       <p className='text-[#FE4E54] mb-4'>{i.name}</p>

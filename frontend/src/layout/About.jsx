@@ -46,7 +46,7 @@ const About = () => {
                 Data?.map((i, index) => {
                   return (
                     <div key={index} className=' tracking-wider mt-6'>
-                      <img className=' bg-cover w-[100%] h-[70vh]  mb-6' src={`/images/${i.image}`} alt="none" />
+                      <img className=' bg-cover w-[100%] h-[70vh]  mb-6' src={`${i.image}`} alt="none" />
                       <p className=' text-[#191919] text-sm'>{i.paragraph}</p>
                       <div className=' flex justify-end  items-center gap-3 mt-8'>
 

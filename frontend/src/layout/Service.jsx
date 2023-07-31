@@ -50,7 +50,7 @@ const Service = () => {
                                     return (
                                         <div key={index} className=' flex items-center justify-center flex-col p-3 w-[25rem] h-[26rem] overflow-scroll shadow-shadow1 bg-slate-400 flex-shrink-0'>
                                             <div className=''>
-                                                <img src={`/images/${i.image}`} className=' mb-4 w-[8rem] h-[8rem] rounded-full bg-center bg-contain' alt="" />
+                                                <img src={`${i.image}`} className=' mb-4 w-[8rem] h-[8rem] rounded-full bg-center bg-contain' alt="" />
                                             </div>
                                             <p className=' mb-4 text-[#00184A]'>{i.heading}</p>
                                             <p className='text-[#00184A] text-sm mb-4'>{i.paragraph}</p>

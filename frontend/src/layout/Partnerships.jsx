@@ -206,7 +206,7 @@ const Partnerships = () => {
                                 <div className=' bg-slate-400 p-3'>
                                     <div className=' flex justify-between items-center'>
                                         <div>
-                                            <img src={`/images/${i.image}`} className=' mb-2 w-[5rem] h-[5rem]' alt="" />
+                                            <img src={`${i.image}`} className=' mb-2 w-[5rem] h-[5rem]' alt="" />
                                         </div>
                                         <div className=' flex gap-4'>
                                             <FaTrash onClick={() => delImageQuestion(i._id)} className=' text-xl cursor-pointer p-2 m-[2px] text-white w-[2.1rem] h-[2.1rem] bg-blue-500 flex justify-center items-center rounded-lg' />

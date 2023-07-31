@@ -1,13 +1,30 @@
 const router = require('express').Router()
 const serviceModel = require('../model/services')
-const { uploadImage } = require('../multer/setup')
+const cloudinary = require('cloudinary').v2
 
-router.post('/service',uploadImage.single('image'),async(req,res)=>{
-    let image= req.file.filename
+router.post('/service',async(req,res)=>{
+    let image = req.files.image;
     let {heading,paragraph} = req.body
-    let create = await serviceModel.create({image:image,paragraph:paragraph,heading:heading})
-    if (create){
-        res.status(200).json(create)
+    try {
+        let about = await new Promise((resolve, reject) => {
+            cloudinary.uploader.upload(image.tempFilePath, (error, result) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+
+        if (about && about.url) {
+            let createabout = await serviceModel.create({ heading:heading , paragraph:paragraph, image: about.url });
+            res.status(200).json(createabout);
+        } else {
+            res.status(500).json({ error: 'Failed to upload image.' });
+        }
+    } 
+    catch (error) {
+        res.status(500).json({ error: 'Something went wrong.' });
     }
 })
 
@@ -32,18 +49,41 @@ router.get('/service/:id',async(req,res)=>{
     }
 })
 
-router.put('/service/:id',uploadImage.single('image'),async(req,res)=>{
-    let {id} = req.params
-    let image= req?.file?.filename
-    let {heading,paragraph} = req.body
-    let update = await serviceModel.findByIdAndUpdate(id,{$set:{
-        image:image,paragraph:paragraph,heading:heading
-    }},{new:true})
-    if (update){
-        res.status(200).json(update)
-    }
-    else{
-        res.status(404).json({msg:"WRONG ID PASSED"})
+router.put('/service/:id',async(req,res)=>{
+    try {
+        let {id} = req.params
+        let image = req?.files?.image
+        let {heading,paragraph} =req.body
+        if (image){
+            let about = await new Promise((resolve, reject) => {
+                cloudinary.uploader.upload(image.tempFilePath, (error, result) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(result);
+                    }
+                });
+            });
+            if (about && about.url) {
+                console.log(about?.url)
+                let createabout = await serviceModel.findByIdAndUpdate(id,{ paragraph: paragraph ,heading:heading, image: about.url },{new:true});
+                res.status(200).json(createabout);
+            } 
+            else {
+                res.status(500).json({ error: 'Failed to upload image.' });
+            }
+        }
+
+        else{
+            let updateAbout = await serviceModel.findByIdAndUpdate(id,{paragraph: paragraph ,heading:heading},{new:true})
+            if (updateAbout){
+                res.status(200).json(updateAbout);
+            }
+        }
+    } 
+    catch (error) {
+        res.status(500).json({ error: 'Something went wrong.' });
+        console.log(error)
     }
 })
 
