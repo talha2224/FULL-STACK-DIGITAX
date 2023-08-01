@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const serviceModel = require('../model/services')
-const {ref,getDownloadURL,uploadBytes} = require('firebase/storage')
+const {ref,getDownloadURL,uploadBytes} = require('@firebase/storage')
 const {upload,storage} = require('../firebase.config')
 
 router.post('/service',upload.single('image'),async(req,res)=>{

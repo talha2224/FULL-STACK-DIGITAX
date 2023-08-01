@@ -1,6 +1,6 @@
 const iossImageModel = require('../model/iossImageModel')
 const router = require('express').Router()
-const {ref,getDownloadURL,uploadBytes} = require('firebase/storage')
+const {ref,getDownloadURL,uploadBytes} = require('@firebase/storage')
 const {upload,storage} = require('../firebase.config')
 
 router.post('/ioss/image',upload.single('image'),async(req,res)=>{
